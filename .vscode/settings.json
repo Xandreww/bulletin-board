@@ -1,0 +1,6 @@
+{
+  "blueprint.templatesPath": [
+    "./dev/blueprint-templates"
+  ],
+  "explorer.compactFolders": false
+}
