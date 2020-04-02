@@ -17,6 +17,9 @@ const Component = ({ className, children }) => (
     </Button>
     {/* for logged in */}
     <Button variant="contained" color="primary" href="/">
+      My ads
+    </Button>
+    <Button variant="contained" color="primary" href="/">
       Logout
     </Button>
     {/* temporarily */}

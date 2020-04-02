@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Container from '@material-ui/core/Container';
 import Toolbar from '@material-ui/core/Toolbar';
-import { CssBaseline } from '@material-ui/core';
 import { Header } from '../Header/Header';
 
 import clsx from 'clsx';
@@ -24,7 +23,6 @@ const Component = ({ className, children }) => (
     </AppBar>
     <Container maxWidth="lg">
       <Toolbar />
-      <h2>MainLayout</h2>
       {children}
     </Container>
   </div>

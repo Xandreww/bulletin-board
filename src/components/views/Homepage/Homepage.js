@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
 
 import clsx from 'clsx';
 
@@ -8,10 +9,14 @@ import clsx from 'clsx';
 
 import styles from './Homepage.module.scss';
 
-const Component = ({className, children}) => (
+const Component = ({ className, children }) => (
   <div className={clsx(className, styles.root)}>
-    <h2>Homepage</h2>
-    {children}
+    {/* for logged in*/}
+    <Button variant="contained" color="primary" href="/post/add">
+      Add new
+    </Button>
+    {/* for all*/}
+    <div>List of adds.....</div>
   </div>
 );
 
