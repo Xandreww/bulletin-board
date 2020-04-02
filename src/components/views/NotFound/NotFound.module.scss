@@ -1,4 +1,28 @@
 @import '../../../styles/settings.scss';
 
-// .root {
+// html,
+// body {
+//   height: 100%;
+//   background: black;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
 // }
+
+.root {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+h2 {
+  color: black;
+  font-size: 45px;
+}
+
+.goBack {
+  background-color: blue;
+  font-size: 17px;
+}
