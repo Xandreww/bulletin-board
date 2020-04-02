@@ -2,5 +2,8 @@
   "blueprint.templatesPath": [
     "./dev/blueprint-templates"
   ],
-  "explorer.compactFolders": false
+  "explorer.compactFolders": false,
+  "cSpell.words": [
+    "gameboy"
+  ]
 }
