@@ -1,4 +1,33 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+  img {
+    max-height: 300px;
+    max-width: 300px;
+    object-fit: cover;
+    margin: 10px;
+  }
+
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .card {
+    max-height: 400px;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    margin: 10px;
+  }
+
+  .cardMedia {
+    margin: 0 auto;
+  }
+
+  .cardActionArea {
+    max-height: 400px;
+    max-width: 400px;
+  }
+}

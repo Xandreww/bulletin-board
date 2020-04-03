@@ -21,11 +21,11 @@ const Component = ({ className, posts }) => (
       Add new
     </Button>
     {/* for all*/}
-    <div>
+    <div className={styles.cards}>
       {posts.map(post => (
-        <Card key={post.id} variant="outlined">
+        <Card className={styles.card} key={post.id} variant="outlined">
           <CardActionArea href={`/post/${post.id}`}>
-            <CardMedia component="img" alt="Ad item" image={post.image} />
+            <CardMedia className={styles.cardMedia} component="img" alt="Ad item" image={post.image} />
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
                 {post.title}
