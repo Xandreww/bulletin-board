@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -25,8 +24,8 @@ const Component = ({ className, posts }) => (
     <div>
       {posts.map(post => (
         <Card key={post.id} variant="outlined">
-          <CardActionArea>
-            <CardMedia component="img" alt="Contemplative Reptile" height="140" image={post.image} title="Contemplative Reptile" />
+          <CardActionArea href={`/post/${post.id}`}>
+            <CardMedia component="img" alt="Ad item" image={post.image} />
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
                 {post.title}
@@ -39,11 +38,6 @@ const Component = ({ className, posts }) => (
               </Typography>
             </CardContent>
           </CardActionArea>
-          <CardActions>
-            <Button size="small" color="primary" href={`/post/${post.id}`}>
-              Details
-            </Button>
-          </CardActions>
         </Card>
       ))}
     </div>

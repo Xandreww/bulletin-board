@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
 
 import clsx from 'clsx';
 
@@ -17,39 +14,34 @@ import styles from './Post.module.scss';
 
 const Component = ({ className, posts, match }) => (
   <div className={clsx(className, styles.root)}>
-    {/* for logged in*/}
-    <Button variant="contained" color="primary" href="/post/add">
-      Add new
-    </Button>
-    {/* for all*/}
     <div>
-      <Card key={posts[match.params.id - 1].id} variant="outlined">
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            alt="Contemplative Reptile"
-            height="140"
-            image={posts[match.params.id - 1].image}
-            title="Contemplative Reptile"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {posts[match.params.id - 1].title}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {posts[match.params.id - 1].text}
-            </Typography>
-            <Typography variant="body1" color="textPrimary" component="p">
-              {`price: $${posts[match.params.id - 1].price}`}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary" href={`/post/${posts[match.params.id - 1].id}`}>
-            Details
-          </Button>
-        </CardActions>
+      <Card key={posts[match.params.id - 1].id}>
+        <CardContent>
+          <div className={styles.dataAndStatus}>
+            <p>
+              Latest update:{' '}
+              {posts[match.params.id - 1].updatedDate ? posts[match.params.id - 1].updatedDate : posts[match.params.id - 1].date}
+            </p>
+            <p>
+              Status: <span className={styles.status}>{posts[match.params.id - 1].status}</span>
+            </p>
+          </div>
+          <h2 className={styles.title}>{posts[match.params.id - 1].title}</h2>
+        </CardContent>
+        <CardMedia component="img" alt="Ad item" image={posts[match.params.id - 1].image} />
+        <CardContent>
+          <p>{posts[match.params.id - 1].text}</p>
+          <p>{`Price: $${posts[match.params.id - 1].price}`}</p>
+          <div>
+            <p>Contact seller:</p>
+            <p>{`email: ${posts[match.params.id - 1].email}`}</p>
+            {posts[match.params.id - 1].telephone && <p>{`phone: ${posts[match.params.id - 1].telephone}`}</p>}
+          </div>
+        </CardContent>
       </Card>
+      <Button className={styles.goBack} variant="contained" color="primary" href="/">
+        Go back to homepage
+      </Button>
     </div>
   </div>
 );

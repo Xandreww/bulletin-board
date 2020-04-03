@@ -1,4 +1,28 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+  img {
+    max-height: 300px;
+    object-fit: cover;
+  }
+
+  .dataAndStatus {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+
+    .status {
+      color: green;
+    }
+  }
+
+  .title {
+    font-size: 35px;
+    margin: 5px 0;
+    text-align: center;
+  }
+
+  .goBack {
+    margin: 10px 0 30px 0;
+  }
+}
