@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
+import AddIcon from '@material-ui/icons/Add';
 
 import clsx from 'clsx';
 
@@ -17,12 +18,13 @@ import styles from './Homepage.module.scss';
 const Component = ({ className, posts }) => (
   <div className={clsx(className, styles.root)}>
     {/* for logged in*/}
-    <Button variant="contained" color="primary" href="/post/add">
+    <Button className={styles.addNew} variant="contained" color="primary" href="/post/add">
+      <AddIcon />
       Add new
     </Button>
     {/* for all*/}
     <div className={styles.cards}>
-      {posts.map(post => (
+      {posts.map((post) => (
         <Card className={styles.card} key={post.id} variant="outlined">
           <CardActionArea href={`/post/${post.id}`}>
             <CardMedia className={styles.cardMedia} component="img" alt="Ad item" image={post.image} />
@@ -49,7 +51,7 @@ Component.propTypes = {
   posts: PropTypes.array,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   posts: getAll(state),
 });
 
