@@ -1,7 +1,7 @@
 /* selectors */
 export const getAll = ({ posts }) => posts.data;
 export const getSinglePost = ({ posts }, postId) => {
-  const filtered = posts.data.filter((post) => post.id === postId);
+  const filtered = posts.data.filter((post) => post.id === parseInt(postId));
   return filtered.length ? filtered[0] : { error: true };
 };
 

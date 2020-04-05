@@ -5,9 +5,21 @@ import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
 
 import { connect } from 'react-redux';
-import { getUser } from '../../../redux/userRedux.js';
+import { getUser, authenticate, unauthenticate } from '../../../redux/userRedux.js';
 
 import styles from './Header.module.scss';
+
+const authenticationHandler = (user) => {
+  user.authenticated ? unauthenticate(user) : authenticate(user);
+};
+
+const logoutHandler = (user) => {
+  user.authenticated ? unauthenticate() : null();
+};
+
+const loginHandler = (user) => {
+  !user.authenticated ? authenticate() : null();
+};
 
 const Component = ({ className, user }) => (
   <div className={clsx(className, styles.root)}>
@@ -16,17 +28,17 @@ const Component = ({ className, user }) => (
         <Button variant="contained" color="primary" href="/">
           My ads
         </Button>
-        <Button variant="contained" color="primary" href="/">
+        <Button variant="contained" color="primary" href="/" onClick={() => logoutHandler(user)}>
           Logout
         </Button>
       </div>
     ) : (
-      <Button variant="contained" color="primary" href="https://google.com">
+      <Button variant="contained" color="primary" href="https://google.com" onClick={() => loginHandler(user)}>
         Login with Google
       </Button>
     )}
     {/* temporarily */}
-    <Button variant="contained" color="primary">
+    <Button variant="contained" color="primary" onClick={() => authenticationHandler(user)}>
       Change user permissions
     </Button>
   </div>
@@ -41,11 +53,12 @@ const mapStateToProps = (state) => ({
   user: getUser(state),
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapDispatchToProps = (dispatch) => ({
+  authenticate: (payload) => dispatch(authenticate(payload)),
+  unauthenticate: (payload) => dispatch(unauthenticate(payload)),
+});
 
-const Container = connect(mapStateToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   // Component as Header,
