@@ -8,12 +8,14 @@ import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
 
 import { connect } from 'react-redux';
-import { getAll } from '../../../redux/postsRedux.js';
+import { getAll, getSinglePost } from '../../../redux/postsRedux.js';
+// import { NotFound } from '../NotFound/NotFound';
 
 import styles from './Post.module.scss';
 
-const Component = ({ className, posts, match }) => (
+const Component = ({ className, posts, match, post }) => (
   <div className={clsx(className, styles.root)}>
+    {console.log(post)}
     <div>
       <Card key={posts[match.params.id - 1].id}>
         <CardContent>
@@ -49,15 +51,17 @@ const Component = ({ className, posts, match }) => (
 Component.propTypes = {
   className: PropTypes.string,
   posts: PropTypes.array,
+  post: PropTypes.object,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.number,
+      id: PropTypes.string,
     }),
   }),
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => ({
   posts: getAll(state),
+  post: getSinglePost(state, props.match.params.id),
 });
 
 const Container = connect(mapStateToProps)(Component);
