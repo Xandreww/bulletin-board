@@ -12,20 +12,18 @@ import clsx from 'clsx';
 
 import styles from './PostAdd.module.scss';
 
-const Component = ({ className, children }) => (
+const Component = ({ className }) => (
   <div className={clsx(className, styles.root)}>
-    <h2>Add new post</h2>
     <form autoComplete="off">
-      <TextField required id="title" label="title" />
-      <TextField required id="price" label="price" type="number" />
-      <TextField required id="content" label="content" multiline rows="10" variant="outlined" />
-      <TextField required id="email" type="email" label="email" />
-      <TextField required id="telephone" type="number" label="telephone number" />
-
-      {/* use display: 'none' on input */}
+      <h2 className={styles.title}>Add new post</h2>
+      <TextField className={styles.formField} required id="title" label="title" />
+      <TextField className={styles.formField} required id="price" label="price" type="number" />
+      <TextField className={styles.content} required id="content" label="content" multiline rows="10" variant="outlined" />
+      <TextField className={styles.formField} required id="email" type="email" label="email" />
+      <TextField className={styles.formField} required id="telephone" type="number" label="telephone number" />
       <input accept="image/*" id="icon-button-file" type="file" />
       <label htmlFor="icon-button-file">
-        <IconButton color="primary" aria-label="upload picture" component="span">
+        <IconButton className={styles.addPhoto} color="primary" aria-label="upload picture" component="span">
           <PhotoCamera />
         </IconButton>
       </label>

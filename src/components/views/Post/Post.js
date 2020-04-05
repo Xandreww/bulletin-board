@@ -38,9 +38,6 @@ const Component = ({ className, post }) => (
           </div>
         </CardContent>
       </Card>
-      <Button className={styles.goBack} variant="contained" color="primary" href="/">
-        Go back to homepage
-      </Button>
     </div>
   </div>
 );

@@ -28,7 +28,7 @@ const Component = ({ className, user }) => (
         <Button variant="contained" color="primary" href="/">
           My ads
         </Button>
-        <Button variant="contained" color="primary" href="/" onClick={() => logoutHandler(user)}>
+        <Button className={styles.logout} variant="contained" color="primary" href="/" onClick={() => logoutHandler(user)}>
           Logout
         </Button>
       </div>
@@ -37,6 +37,9 @@ const Component = ({ className, user }) => (
         Login with Google
       </Button>
     )}
+    <Button className={styles.goBack} variant="contained" color="primary" href="/">
+      Go back to homepage
+    </Button>
     {/* temporarily */}
     <Button variant="contained" color="primary" onClick={() => authenticationHandler(user)}>
       Change user permissions
