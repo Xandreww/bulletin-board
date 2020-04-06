@@ -5,11 +5,13 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import shortid from 'shortid';
+import { NotFound } from '../NotFound/NotFound';
 
 import clsx from 'clsx';
 
 import { connect } from 'react-redux';
 import { addPost } from '../../../redux/postsRedux.js';
+import { getUser } from '../../../redux/userRedux.js';
 
 import styles from './PostAdd.module.scss';
 
@@ -28,6 +30,7 @@ class Component extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     addPost: PropTypes.func,
+    user: PropTypes.object,
   };
 
   handleChange = ({ target }) => {
@@ -74,10 +77,10 @@ class Component extends React.Component {
 
   render() {
     const { handleChange, handleSubmit } = this;
-    const { className } = this.props;
+    const { className, user } = this.props;
     const { title, price, content, email, telephone, image } = this.state;
 
-    return (
+    return user.authenticated ? (
       <div className={clsx(className, styles.root)}>
         <form autoComplete="off" onSubmit={(event) => handleSubmit(event)}>
           <h2 className={styles.title}>Add new post</h2>
@@ -116,15 +119,21 @@ class Component extends React.Component {
           </Button>
         </form>
       </div>
+    ) : (
+      <NotFound />
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  user: getUser(state),
+});
 
 const mapDispatchToProps = (dispatch) => ({
   addPost: (payload) => dispatch(addPost(payload)),
 });
 
-const Container = connect(mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   // Component as PostAdd,
