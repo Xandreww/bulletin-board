@@ -18,6 +18,7 @@ export const initialState = {
         date: '01.01.2020',
         updateDate: '01.04.2020',
         status: 'published',
+        userId: 1,
       },
       {
         id: 2,
@@ -30,6 +31,7 @@ export const initialState = {
         date: '02.02.2020',
         updateDate: '01.04.2020',
         status: 'published',
+        userId: 2,
       },
       {
         id: 3,
@@ -42,6 +44,7 @@ export const initialState = {
         date: '28.03.2020',
         updateDate: '',
         status: 'published',
+        userId: 1,
       },
       {
         id: 4,
@@ -55,6 +58,7 @@ export const initialState = {
         date: '03.02.2020',
         updateDate: '28.03.2020',
         status: 'published',
+        userId: 1,
       },
       {
         id: 5,
@@ -67,6 +71,7 @@ export const initialState = {
         date: '03.03.2020',
         updateDate: '28.03.2020',
         status: 'published',
+        userId: 1,
       },
     ],
     loading: {
@@ -77,5 +82,6 @@ export const initialState = {
   user: {
     id: 1,
     authenticated: true,
+    admin: false,
   },
 };

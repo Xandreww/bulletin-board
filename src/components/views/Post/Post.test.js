@@ -4,7 +4,7 @@ import { PostComponent } from './Post';
 
 const mockProps = {
   post: {
-    id: 1,
+    id: '123abc',
     title: 'Sofa for sale!',
     price: 30,
     text: 'Hello, I am selling my old sofa',
@@ -14,6 +14,11 @@ const mockProps = {
     date: '01.01.2020',
     updateDate: '01.04.2020',
     status: 'published',
+    userId: 1,
+  },
+  user: {
+    id: 1,
+    authenticated: true,
   },
 };
 

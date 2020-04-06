@@ -19,7 +19,7 @@ const Component = ({ className, user, login, logoff }) => {
     <div className={clsx(className, styles.root)}>
       {user.authenticated ? (
         <div>
-          <Button variant="contained" color="primary" href="/">
+          <Button variant="contained" color="primary" href="/myAds">
             My ads
           </Button>
           <Button className={styles.logout} variant="contained" color="primary" href="/" onClick={authenticationHandler}>

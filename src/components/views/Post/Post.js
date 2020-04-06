@@ -10,11 +10,11 @@ import clsx from 'clsx';
 
 import { connect } from 'react-redux';
 import { getAll, getSinglePost } from '../../../redux/postsRedux.js';
-// import { NotFound } from '../NotFound/NotFound';
+import { getUser } from '../../../redux/userRedux';
 
 import styles from './Post.module.scss';
 
-const Component = ({ className, post }) => (
+const Component = ({ className, post, user }) => (
   <div className={clsx(className, styles.root)}>
     <Card key={post.id}>
       <CardContent>
@@ -37,10 +37,12 @@ const Component = ({ className, post }) => (
         </div>
       </CardContent>
     </Card>
-    <Button className={styles.editPostButton} variant="contained" color="primary" href={`/post/${post.id}/edit`}>
-      <EditIcon />
-      Edit post
-    </Button>
+    {user.id === post.userId && (
+      <Button className={styles.editPostButton} variant="contained" color="primary" href={`/post/${post.id}/edit`}>
+        <EditIcon />
+        Edit post
+      </Button>
+    )}
   </div>
 );
 
@@ -48,16 +50,13 @@ Component.propTypes = {
   className: PropTypes.string,
   posts: PropTypes.array,
   post: PropTypes.object,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string,
-    }),
-  }),
+  user: PropTypes.object,
 };
 
 const mapStateToProps = (state, props) => ({
   posts: getAll(state),
   post: getSinglePost(state, props.match.params.id),
+  user: getUser(state),
 });
 
 const Container = connect(mapStateToProps)(Component);
