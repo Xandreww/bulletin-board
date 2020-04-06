@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import shortid from 'shortid';
 
 import clsx from 'clsx';
 
@@ -14,12 +15,14 @@ import styles from './PostAdd.module.scss';
 
 class Component extends React.Component {
   state = {
+    id: '',
     title: '',
     price: '',
     content: '',
     email: '',
     telephone: '',
     image: undefined,
+    status: '',
   };
 
   static propTypes = {
@@ -63,6 +66,7 @@ class Component extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    this.setState({ id: shortid.generate, status: 'published' });
     console.log('Submit!', this.state);
 
     this.props.addPost(this.state);
