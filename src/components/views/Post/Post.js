@@ -16,7 +16,6 @@ import styles from './Post.module.scss';
 
 const Component = ({ className, post }) => (
   <div className={clsx(className, styles.root)}>
-    {console.log(post)}
     <Card key={post.id}>
       <CardContent>
         <div className={styles.dataAndStatus}>
