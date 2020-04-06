@@ -6,30 +6,26 @@ const reducerName = 'user';
 const createActionName = (name) => `app/${reducerName}/${name}`;
 
 /* action types */
-const AUTHENTICATE = createActionName('AUTHENTICATE');
-const UNAUTHENTICATE = createActionName('UNAUTHENTICATE');
+const LOGIN = createActionName('LOGIN');
+const LOGOFF = createActionName('LOGOFF');
 
 /* action creators */
-export const authenticate = (payload) => ({ payload, type: AUTHENTICATE });
-export const unauthenticate = (payload) => ({ payload, type: UNAUTHENTICATE });
+export const login = (payload) => ({ payload, type: LOGIN });
+export const logoff = (payload) => ({ payload, type: LOGOFF });
 
 /* reducer */
 export const reducer = (statePart = [], action = {}) => {
   switch (action.type) {
-    case AUTHENTICATE: {
+    case LOGIN: {
       return {
         ...statePart,
-        user: {
-          authenticated: true,
-        },
+        authenticated: true,
       };
     }
-    case UNAUTHENTICATE: {
+    case LOGOFF: {
       return {
         ...statePart,
-        user: {
-          authenticated: false,
-        },
+        authenticated: false,
       };
     }
     default:
