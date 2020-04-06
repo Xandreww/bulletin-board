@@ -12,17 +12,18 @@ import clsx from 'clsx';
 
 import { connect } from 'react-redux';
 import { getAll } from '../../../redux/postsRedux.js';
+import { getUser } from '../../../redux/userRedux';
 
 import styles from './Homepage.module.scss';
 
-const Component = ({ className, posts }) => (
+const Component = ({ className, posts, user }) => (
   <div className={clsx(className, styles.root)}>
-    {/* for logged in*/}
-    <Button className={styles.addNew} variant="contained" color="primary" href="/post/add">
-      <AddIcon />
-      Add new
-    </Button>
-    {/* for all*/}
+    {user.authenticated && (
+      <Button className={styles.addNew} variant="contained" color="primary" href="/post/add">
+        <AddIcon />
+        Add new
+      </Button>
+    )}
     <div className={styles.cards}>
       {posts.map((post) => (
         <Card className={styles.card} key={post.id} variant="outlined">
@@ -49,10 +50,12 @@ const Component = ({ className, posts }) => (
 Component.propTypes = {
   className: PropTypes.string,
   posts: PropTypes.array,
+  user: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
   posts: getAll(state),
+  user: getUser(state),
 });
 
 const Container = connect(mapStateToProps)(Component);
