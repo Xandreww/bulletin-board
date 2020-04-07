@@ -17,14 +17,14 @@ import styles from './PostAdd.module.scss';
 
 class Component extends React.Component {
   state = {
-    id: '',
+    id: shortid(),
     title: '',
     price: '',
     content: '',
     email: '',
     telephone: '',
     image: undefined,
-    status: '',
+    status: 'published',
   };
 
   static propTypes = {
@@ -34,9 +34,6 @@ class Component extends React.Component {
   };
 
   handleChange = ({ target }) => {
-    console.log('target type:', target.type);
-    console.log('target value:', target.value);
-    console.log(this.state);
     switch (target.type) {
       case 'text': {
         this.setState({ title: target.value });
@@ -69,7 +66,7 @@ class Component extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.setState({ id: shortid.generate, status: 'published' });
+
     console.log('Submit!', this.state);
 
     this.props.addPost(this.state);
@@ -80,11 +77,27 @@ class Component extends React.Component {
     const { className, user } = this.props;
     const { title, price, content, email, telephone, image } = this.state;
 
+    const titleProps = {
+      minLength: 10,
+    };
+
+    const contentProps = {
+      minLength: 20,
+    };
+
     return user.authenticated ? (
       <div className={clsx(className, styles.root)}>
         <form autoComplete="off" onSubmit={(event) => handleSubmit(event)}>
           <h2 className={styles.title}>Add new post</h2>
-          <TextField className={styles.formField} required id="title" label="title" minLength="10" value={title} onChange={handleChange} />
+          <TextField
+            className={styles.formField}
+            required
+            id="title"
+            label="title"
+            inputProps={titleProps}
+            value={title}
+            onChange={handleChange}
+          />
           <TextField className={styles.formField} required id="price" label="price" type="number" value={price} onChange={handleChange} />
           <TextField
             className={styles.content}
@@ -94,7 +107,7 @@ class Component extends React.Component {
             multiline
             rows="10"
             variant="outlined"
-            minLength="20"
+            inputProps={contentProps}
             value={content}
             onChange={handleChange}
           />

@@ -37,7 +37,7 @@ const Component = ({ className, post, user }) => (
         </div>
       </CardContent>
     </Card>
-    {user.id === post.userId && (
+    {(user.id === post.userId || user.admin) && (
       <Button className={styles.editPostButton} variant="contained" color="primary" href={`/post/${post.id}/edit`}>
         <EditIcon />
         Edit post
