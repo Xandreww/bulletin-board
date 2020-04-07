@@ -69,7 +69,7 @@ class Component extends React.Component {
         break;
       }
       default:
-        return console.log('no switch type');
+        console.log('no switch type');
     }
   };
 
