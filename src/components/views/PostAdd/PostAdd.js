@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import shortid from 'shortid';
+import datePicker from 'date-and-time';
 import { NotFound } from '../NotFound/NotFound';
 
 import clsx from 'clsx';
@@ -24,14 +25,22 @@ class Component extends React.Component {
     email: '',
     telephone: '',
     image: undefined,
+    date: '',
     status: 'published',
+    userId: this.props.user.id,
   };
 
   static propTypes = {
     className: PropTypes.string,
     addPost: PropTypes.func,
     user: PropTypes.object,
+    getCurrentDate: PropTypes.func,
   };
+
+  componentDidMount() {
+    const now = new Date();
+    this.setState({ date: datePicker.format(now, 'DD.MM.YYYY') });
+  }
 
   handleChange = ({ target }) => {
     switch (target.type) {
@@ -56,7 +65,7 @@ class Component extends React.Component {
         break;
       }
       case 'file': {
-        this.setState({ telephone: target.value });
+        this.setState({ image: target.value });
         break;
       }
       default:
