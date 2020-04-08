@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import AddIcon from '@material-ui/icons/Add';
+import { Link } from 'react-router-dom';
 
 import clsx from 'clsx';
 
@@ -19,7 +20,7 @@ import styles from './MyAds.module.scss';
 const Component = ({ className, posts, user }) => (
   <div className={clsx(className, styles.root)}>
     {user.authenticated && (
-      <Button className={styles.addNew} variant="contained" color="primary" href="/post/add">
+      <Button component={Link} className={styles.addNew} variant="contained" color="primary" to="/post/add">
         <AddIcon />
         Add new
       </Button>
@@ -27,7 +28,7 @@ const Component = ({ className, posts, user }) => (
     <div className={styles.cards}>
       {posts.map((post) => (
         <Card className={styles.card} key={post.id} variant="outlined">
-          <CardActionArea href={`/post/${post.id}`}>
+          <CardActionArea component={Link} to={`/post/${post.id}`}>
             <CardMedia className={styles.cardMedia} component="img" alt="Ad item" image={post.image} />
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">

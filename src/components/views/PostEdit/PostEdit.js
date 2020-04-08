@@ -25,7 +25,6 @@ class Component extends React.Component {
     telephone: this.props.post.telephone,
     image: this.props.post.image,
     date: this.props.post.date,
-    // eslint-disable-next-line react/prop-types
     updateDate: this.props.updateDate,
     status: this.props.post.status,
     userId: this.props.user.id,
@@ -36,6 +35,7 @@ class Component extends React.Component {
     user: PropTypes.object,
     post: PropTypes.object,
     editPost: PropTypes.func,
+    updateDate: PropTypes.instanceOf(Date),
   };
 
   componentDidMount() {

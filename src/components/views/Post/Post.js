@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
+import { Link } from 'react-router-dom';
 
 import clsx from 'clsx';
 
@@ -38,7 +39,7 @@ const Component = ({ className, post, user }) => (
       </CardContent>
     </Card>
     {(user.id === post.userId || user.admin) && (
-      <Button className={styles.editPostButton} variant="contained" color="primary" href={`/post/${post.id}/edit`}>
+      <Button component={Link} className={styles.editPostButton} variant="contained" color="primary" to={`/post/${post.id}/edit`}>
         <EditIcon />
         Edit post
       </Button>
