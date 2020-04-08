@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import datePicker from 'date-and-time';
 import { NotFound } from '../NotFound/NotFound';
 
@@ -67,6 +65,7 @@ class Component extends React.Component {
       }
       case 'file': {
         this.setState({ file: target.value });
+        console.log('file:', target.value);
         break;
       }
       default:
@@ -97,6 +96,7 @@ class Component extends React.Component {
       <div className={clsx(className, styles.root)}>
         <form autoComplete="off" onSubmit={(event) => handleSubmit(event)}>
           <h2 className={styles.title}>Edit post</h2>
+          <img src={image} alt="post img" className={styles.image} />
           <TextField
             className={styles.formField}
             required
@@ -129,13 +129,13 @@ class Component extends React.Component {
             value={telephone}
             onChange={handleChange}
           />
-          <input accept="image/*" id="icon-button-file" type="file" value={image} onChange={handleChange} />
-          <label htmlFor="icon-button-file">
-            <IconButton className={styles.addPhoto} color="primary" aria-label="upload picture" component="span">
-              <PhotoCamera />
-            </IconButton>
+          <input accept="image/*" className={styles.input} id="raised-button-file" multiple type="file" onChange={handleChange} />
+          <label htmlFor="raised-button-file" className={styles.changePhoto}>
+            <Button variant="contained" component="span">
+              Change image
+            </Button>
           </label>
-          <Button type="submit" variant="contained" color="primary">
+          <Button type="submit" variant="contained" color="primary" className={styles.submit}>
             Submit
           </Button>
         </form>

@@ -30,11 +30,20 @@ form {
     display: none;
   }
 
-  .addPhoto {
-    margin: 20px 0 30px 0;
+  .changePhoto {
+    margin: 20px 0;
   }
 }
 
 .goBack {
   margin: 30px 0;
+}
+
+.submit {
+  margin-bottom: 20px;
+}
+
+.image {
+  width: 50%;
+  margin: 10px 0 20px;
 }
