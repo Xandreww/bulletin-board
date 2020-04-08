@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import datePicker from 'date-and-time';
 import { NotFound } from '../NotFound/NotFound';
 
@@ -83,7 +81,7 @@ class Component extends React.Component {
   render() {
     const { handleChange, handleSubmit } = this;
     const { className, user, post } = this.props;
-    const { title, price, content, email, telephone, image } = this.state;
+    const { title, price, content, email, telephone } = this.state;
 
     const titleProps = {
       minLength: 10,
@@ -129,12 +127,12 @@ class Component extends React.Component {
             value={telephone}
             onChange={handleChange}
           />
-          <input accept="image/*" id="icon-button-file" type="file" value={image} onChange={handleChange} />
+          {/* <input accept="image/*" id="icon-button-file" type="file" value={image} onChange={handleChange} />
           <label htmlFor="icon-button-file">
             <IconButton className={styles.addPhoto} color="primary" aria-label="upload picture" component="span">
               <PhotoCamera />
             </IconButton>
-          </label>
+          </label> */}
           <Button type="submit" variant="contained" color="primary">
             Submit
           </Button>
