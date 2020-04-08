@@ -18,7 +18,6 @@ import styles from './PostAdd.module.scss';
 
 class Component extends React.Component {
   state = {
-    id: shortid(),
     title: '',
     price: '',
     content: '',
@@ -26,7 +25,6 @@ class Component extends React.Component {
     telephone: '',
     image: undefined,
     date: '',
-    status: 'published',
     userId: this.props.user.id,
   };
 
@@ -76,9 +74,9 @@ class Component extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log('Submit!', this.state);
+    const post = { ...this.state, id: shortid(), status: 'published' };
 
-    this.props.addPost(this.state);
+    this.props.addPost(post);
   };
 
   render() {

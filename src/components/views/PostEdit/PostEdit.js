@@ -23,7 +23,6 @@ class Component extends React.Component {
     telephone: this.props.post.telephone,
     image: this.props.post.image,
     date: this.props.post.date,
-    updateDate: this.props.updateDate,
     status: this.props.post.status,
     userId: this.props.user.id,
   };
@@ -35,11 +34,6 @@ class Component extends React.Component {
     editPost: PropTypes.func,
     updateDate: PropTypes.instanceOf(Date),
   };
-
-  componentDidMount() {
-    const now = new Date();
-    this.setState({ updateDate: datePicker.format(now, 'DD.MM.YYYY') });
-  }
 
   handleChange = ({ target }) => {
     switch (target.type) {
@@ -65,7 +59,6 @@ class Component extends React.Component {
       }
       case 'file': {
         this.setState({ file: target.value });
-        console.log('file:', target.value);
         break;
       }
       default:
@@ -75,8 +68,13 @@ class Component extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Submit!', this.state);
-    this.props.editPost(this.state);
+
+    const now = new Date();
+    const generateDate = datePicker.format(now, 'DD.MM.YYYY');
+
+    const post = { ...this.state, updateDate: generateDate };
+
+    this.props.editPost(post);
   };
 
   render() {
