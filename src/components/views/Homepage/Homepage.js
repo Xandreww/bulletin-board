@@ -11,7 +11,7 @@ import AddIcon from '@material-ui/icons/Add';
 import clsx from 'clsx';
 
 import { connect } from 'react-redux';
-import { getAll } from '../../../redux/postsRedux.js';
+import { getAll, fetchAllPosts } from '../../../redux/postsRedux.js';
 import { getUser } from '../../../redux/userRedux';
 
 import styles from './Homepage.module.scss';
@@ -58,7 +58,11 @@ const mapStateToProps = (state) => ({
   user: getUser(state),
 });
 
-const Container = connect(mapStateToProps)(Component);
+const mapDispatchToProps = (dispatch) => ({
+  fetchAllPosts: () => dispatch(fetchAllPosts()),
+});
+
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   // Component as Homepage,
