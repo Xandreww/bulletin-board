@@ -90,7 +90,7 @@ class Component extends React.Component {
       minLength: 20,
     };
 
-    return user.authenticated && user.id === post.userId ? (
+    return (user.authenticated && user.id === post.userId) || user.admin ? (
       <div className={clsx(className, styles.root)}>
         <form autoComplete="off" onSubmit={(event) => handleSubmit(event)}>
           <h2 className={styles.title}>Edit post</h2>

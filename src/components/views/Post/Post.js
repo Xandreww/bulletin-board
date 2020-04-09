@@ -6,6 +6,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
 import { Link } from 'react-router-dom';
+import { NotFound } from '../NotFound/NotFound';
 
 import clsx from 'clsx';
 
@@ -17,27 +18,31 @@ import styles from './Post.module.scss';
 
 const Component = ({ className, post, user }) => (
   <div className={clsx(className, styles.root)}>
-    <Card key={post.id}>
-      <CardContent>
-        <div className={styles.dataAndStatus}>
-          <p>Latest update: {post.updatedDate ? post.updatedDate : post.date}</p>
-          <p>
-            Status: <span className={styles.status}>{post.status}</span>
-          </p>
-        </div>
-        <h2 className={styles.title}>{post.title}</h2>
-      </CardContent>
-      <CardMedia component="img" alt="Ad item" image={post.image} />
-      <CardContent>
-        <p>{post.text}</p>
-        <p>{`Price: $${post.price}`}</p>
-        <div>
-          <p>Contact seller:</p>
-          <p>{`email: ${post.email}`}</p>
-          {post.telephone && <p>{`phone: ${post.telephone}`}</p>}
-        </div>
-      </CardContent>
-    </Card>
+    {user.authenticated || user.admin ? (
+      <Card key={post.id}>
+        <CardContent>
+          <div className={styles.dataAndStatus}>
+            <p>Latest update: {post.updatedDate ? post.updatedDate : post.date}</p>
+            <p>
+              Status: <span className={styles.status}>{post.status}</span>
+            </p>
+          </div>
+          <h2 className={styles.title}>{post.title}</h2>
+        </CardContent>
+        <CardMedia component="img" alt="Ad item" image={post.image} />
+        <CardContent>
+          <p>{post.text}</p>
+          <p>{`Price: $${post.price}`}</p>
+          <div>
+            <p>Contact seller:</p>
+            <p>{`email: ${post.email}`}</p>
+            {post.telephone && <p>{`phone: ${post.telephone}`}</p>}
+          </div>
+        </CardContent>
+      </Card>
+    ) : (
+      <NotFound />
+    )}
     {(user.id === post.userId || user.admin) && (
       <Button component={Link} className={styles.editPostButton} variant="contained" color="primary" to={`/post/${post.id}/edit`}>
         <EditIcon />

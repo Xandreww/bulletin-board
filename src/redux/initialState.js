@@ -81,7 +81,7 @@ export const initialState = {
   },
   user: {
     id: 1,
-    authenticated: true,
-    admin: false,
+    authenticated: false,
+    admin: true,
   },
 };

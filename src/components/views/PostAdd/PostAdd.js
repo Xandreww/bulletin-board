@@ -24,7 +24,6 @@ class Component extends React.Component {
     email: '',
     telephone: '',
     image: undefined,
-    date: '',
     userId: this.props.user.id,
   };
 
@@ -34,11 +33,6 @@ class Component extends React.Component {
     user: PropTypes.object,
     getCurrentDate: PropTypes.func,
   };
-
-  componentDidMount() {
-    const now = new Date();
-    this.setState({ date: datePicker.format(now, 'DD.MM.YYYY') });
-  }
 
   handleChange = ({ target }) => {
     switch (target.type) {
@@ -74,7 +68,10 @@ class Component extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    const post = { ...this.state, id: shortid(), status: 'published' };
+    const now = new Date();
+    const generateDate = datePicker.format(now, 'DD.MM.YYYY');
+
+    const post = { ...this.state, id: shortid(), date: generateDate, status: 'published' };
 
     this.props.addPost(post);
   };
