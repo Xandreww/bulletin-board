@@ -5,7 +5,7 @@ import { HomepageComponent } from './Homepage';
 const mockProps = {
   posts: [
     {
-      id: 1,
+      _id: 1,
       title: 'Sofa for sale!',
       price: 30,
       text: 'Hello, I am selling my old sofa',
@@ -17,7 +17,7 @@ const mockProps = {
       status: 'published',
     },
     {
-      id: 2,
+      _id: 2,
       title: 'Old school GameBoy for you!',
       price: 10,
       text: 'Hello, I have old school GameBoy for sell. Classic!',
@@ -29,7 +29,7 @@ const mockProps = {
       status: 'published',
     },
     {
-      id: 3,
+      _id: 3,
       title: 'iPhone 600 mega!',
       price: 500,
       text: 'iPhone 600 mega for sale. Right away.',
@@ -38,10 +38,10 @@ const mockProps = {
       image: 'C:/testImage.jpg',
       date: '28.03.2020',
       updateDate: '',
-      status: 'published',
+      _status: 'published',
     },
     {
-      id: 4,
+      _id: 4,
       title: 'Unused laptop',
       price: 900,
       text:
@@ -54,7 +54,7 @@ const mockProps = {
       status: 'published',
     },
     {
-      id: 5,
+      _id: 5,
       title: 'Tablet for sale!',
       price: 400,
       text: 'Hello, I am willing to sell the tablet SuperTurboMega. I was using it for half a year.',
@@ -66,6 +66,7 @@ const mockProps = {
       status: 'published',
     },
   ],
+  fetchAllPosts: () => console.log('func'),
   user: {
     id: 1,
     authenticated: true,
