@@ -43,7 +43,7 @@ const Component = ({ className, post, user }) => (
     ) : (
       <NotFound />
     )}
-    {(user.id === post.userId || user.admin) && (
+    {user.id === post.userId && (
       <Button component={Link} className={styles.editPostButton} variant="contained" color="primary" to={`/post/${post.id}/edit`}>
         <EditIcon />
         Edit post
