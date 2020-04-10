@@ -80,7 +80,7 @@ class Component extends React.Component {
   render() {
     const { handleChange, handleSubmit } = this;
     const { className, user, post } = this.props;
-    const { title, price, content, email, telephone } = this.state;
+    const { title, price, content, email, telephone, image } = this.state;
 
     const titleProps = {
       minLength: 10,

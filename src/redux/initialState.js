@@ -8,7 +8,7 @@ export const initialState = {
   },
   user: {
     id: 1,
-    authenticated: false,
-    admin: true,
+    authenticated: true,
+    admin: false,
   },
 };
