@@ -8,7 +8,7 @@ const postSchema = new mongoose.Schema({
   telephone: { type: String },
   photo: { type: String },
   date: { type: Date, required: true },
-  updateDate: { type: Date, required: true },
+  updateDate: { type: Date },
   status: { type: String, required: true },
   userId: [{ type: mongoose.SchemaTypes.ObjectId, required: true, ref: 'User' }],
 });

@@ -6,27 +6,30 @@ GET http://localhost:8000/api/postsFull/
 
 ###
 
-GET http://localhost:8000/api/seats/5e5b92b91c9d4400001a5069
-
-### Send the same request two times to check is a seat is already taken
-
-POST http://localhost:8000/api/seats/
-content-type: multipart/form-data
-
-  title= "testTitle",
-  price= 123,
-  content= "Test Content Test Content Test Content",
-  email= "test@test.com",
-  telephone= "123456789",
+GET http://localhost:8000/api/posts/5e905d7ba87c9a31d048da07
 
 ###
 
-# PUT http://localhost:8000/api/seats/5e5e335864f7bf1bc046ed9b
-# content-type: application/json
+POST http://localhost:8000/api/posts/
+content-type: application/json
 
-# {
-#   "day": 2,
-#   "seat": 321,
-#   "client": "Test Client2",
-#   "email": "test2@test2.com"
-# }
+{
+  "title": "test Title",
+  "price": 25,
+  "content": "testContent testContent testContent",
+  "email": "testEmail@test.test",
+  "telephone": "213456456"
+}
+
+###
+
+PUT http://localhost:8000/api/posts/5e9062950e71d4322470e7ec
+content-type: application/json
+
+{
+  "title": "test Title2",
+  "price": 252,
+  "content": "testContent2 testContent2 testContent2",
+  "email": "testEmail2@test2.test2",
+  "telephone": "222222222"
+}
