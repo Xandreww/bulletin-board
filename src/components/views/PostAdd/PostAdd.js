@@ -11,7 +11,7 @@ import { NotFound } from '../NotFound/NotFound';
 import clsx from 'clsx';
 
 import { connect } from 'react-redux';
-import { addPost } from '../../../redux/postsRedux.js';
+import { addPostRequest } from '../../../redux/postsRedux.js';
 import { getUser } from '../../../redux/userRedux.js';
 
 import styles from './PostAdd.module.scss';
@@ -147,7 +147,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addPost: (payload) => dispatch(addPost(payload)),
+  addPost: (payload) => dispatch(addPostRequest(payload)),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

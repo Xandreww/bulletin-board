@@ -10,7 +10,8 @@ const postSchema = new mongoose.Schema({
   date: { type: Date, required: true },
   updateDate: { type: Date },
   status: { type: String, required: true },
-  userId: [{ type: mongoose.SchemaTypes.ObjectId, required: true, ref: 'User' }],
+  // userId: [{ type: mongoose.SchemaTypes.ObjectId, required: true, ref: 'User' }],
+  userId: { type: String, required: true },
 });
 
 module.exports = mongoose.model('Post', postSchema);

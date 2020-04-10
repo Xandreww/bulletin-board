@@ -1,0 +1,7 @@
+GET http://localhost:8000/api/users/
+
+###
+
+GET http://localhost:8000/api/users/5e8f3566a4c1992f88de5841
+
+# ###

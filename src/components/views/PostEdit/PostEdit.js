@@ -8,14 +8,14 @@ import { NotFound } from '../NotFound/NotFound';
 import clsx from 'clsx';
 
 import { connect } from 'react-redux';
-import { getSinglePost, editPost } from '../../../redux/postsRedux.js';
+import { getSinglePost, updatePostRequest } from '../../../redux/postsRedux.js';
 import { getUser } from '../../../redux/userRedux.js';
 
 import styles from './PostEdit.module.scss';
 
 class Component extends React.Component {
   state = {
-    id: this.props.post.id,
+    id: this.props.post._id,
     title: this.props.post.title,
     price: this.props.post.price,
     content: this.props.post.content,
@@ -74,7 +74,7 @@ class Component extends React.Component {
 
     const post = { ...this.state, updateDate: generateDate };
 
-    this.props.editPost(post);
+    this.props.editPost(post.id, post);
   };
 
   render() {
@@ -150,7 +150,7 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  editPost: (payload) => dispatch(editPost(payload)),
+  editPost: (id, payload) => dispatch(updatePostRequest(id, payload)),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

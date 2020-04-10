@@ -8,6 +8,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import AddIcon from '@material-ui/icons/Add';
 import { Link } from 'react-router-dom';
+import { api } from '../../../settings';
 
 import clsx from 'clsx';
 
@@ -32,7 +33,6 @@ class Component extends React.Component {
 
   render() {
     const { className, posts, user } = this.props;
-    console.log('posts on homepage: ', posts);
 
     return (
       <div className={clsx(className, styles.root)}>
@@ -46,7 +46,7 @@ class Component extends React.Component {
           {posts.map((post) => (
             <Card className={styles.card} key={post._id} variant="outlined">
               <CardActionArea component={Link} to={`/post/${post._id}`}>
-                <CardMedia className={styles.cardMedia} component="img" alt="Ad item" image={post.image} />
+                <CardMedia className={styles.cardMedia} component="img" alt="Ad item" image={`${api.imageUrl}${post.image}`} />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
                     {post.title}

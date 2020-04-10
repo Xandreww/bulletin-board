@@ -4,7 +4,7 @@ import { api } from '../settings';
 /* selectors */
 export const getAll = ({ posts }) => posts.data;
 export const getSinglePost = ({ posts }, postId) => {
-  const filtered = posts.data.filter((post) => post.id === parseInt(postId));
+  const filtered = posts.data.filter((post) => post._id === postId);
   return filtered.length ? filtered[0] : { error: true };
 };
 export const getMyAds = ({ posts, user }) => {
@@ -20,7 +20,7 @@ export const fetchAllPosts = () => {
     if (posts.data.length === 0 && posts.loading.active === false) {
       dispatch(fetchStarted());
 
-      Axios.get(`${api.url}/${api.posts}`)
+      Axios.get(`${api.url}/${api.fullPosts}`)
         .then((res) => {
           dispatch(fetchSuccess(res.data));
         })
@@ -28,6 +28,34 @@ export const fetchAllPosts = () => {
           dispatch(fetchError(err.message || true));
         });
     }
+  };
+};
+
+export const addPostRequest = (data) => {
+  return (dispatch, getState) => {
+    dispatch(fetchStarted());
+
+    Axios.post(`${api.url}/${api.posts}`, data)
+      .then((res) => {
+        dispatch(addPost(res.data));
+      })
+      .catch((err) => {
+        dispatch(fetchError(err.message || true));
+      });
+  };
+};
+
+export const updatePostRequest = (id, data) => {
+  return (dispatch, getState) => {
+    dispatch(fetchStarted());
+
+    Axios.put(`${api.url}/${api.posts}/${id}`, data)
+      .then((res) => {
+        dispatch(editPost(res.data));
+      })
+      .catch((err) => {
+        dispatch(fetchError(err.message || true));
+      });
   };
 };
 
@@ -94,7 +122,7 @@ export const reducer = (statePart = [], action = {}) => {
       return {
         ...statePart,
         data: statePart.data.map((post) => {
-          return post.id === action.payload.id ? action.payload : post;
+          return post._id === action.payload._id ? action.payload : post;
         }),
       };
     }
