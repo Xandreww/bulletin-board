@@ -44,8 +44,8 @@ class Component extends React.Component {
         )}
         <div className={styles.cards}>
           {posts.map((post) => (
-            <Card className={styles.card} key={post.id} variant="outlined">
-              <CardActionArea component={Link} to={`/post/${post.id}`}>
+            <Card className={styles.card} key={post._id} variant="outlined">
+              <CardActionArea component={Link} to={`/post/${post._id}`}>
                 <CardMedia className={styles.cardMedia} component="img" alt="Ad item" image={post.image} />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">

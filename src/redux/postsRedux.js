@@ -15,15 +15,19 @@ export const getMyAds = ({ posts, user }) => {
 /* thunk creators */
 export const fetchAllPosts = () => {
   return (dispatch, getState) => {
-    dispatch(fetchStarted());
+    const { posts } = getState();
 
-    Axios.get(`${api.url}/${api.posts}`)
-      .then((res) => {
-        dispatch(fetchSuccess(res.data));
-      })
-      .catch((err) => {
-        dispatch(fetchError(err.message || true));
-      });
+    if (posts.data.length === 0 && posts.loading.active === false) {
+      dispatch(fetchStarted());
+
+      Axios.get(`${api.url}/${api.posts}`)
+        .then((res) => {
+          dispatch(fetchSuccess(res.data));
+        })
+        .catch((err) => {
+          dispatch(fetchError(err.message || true));
+        });
+    }
   };
 };
 
