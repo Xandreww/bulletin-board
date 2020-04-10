@@ -23,8 +23,6 @@ class Component extends React.Component {
     telephone: this.props.post.telephone,
     image: this.props.post.image,
     date: this.props.post.date,
-    // eslint-disable-next-line react/prop-types
-    updateDate: this.props.updateDate,
     status: this.props.post.status,
     userId: this.props.user.id,
   };
@@ -34,12 +32,8 @@ class Component extends React.Component {
     user: PropTypes.object,
     post: PropTypes.object,
     editPost: PropTypes.func,
+    updateDate: PropTypes.instanceOf(Date),
   };
-
-  componentDidMount() {
-    const now = new Date();
-    this.setState({ updateDate: datePicker.format(now, 'DD.MM.YYYY') });
-  }
 
   handleChange = ({ target }) => {
     switch (target.type) {
@@ -74,8 +68,13 @@ class Component extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Submit!', this.state);
-    this.props.editPost(this.state);
+
+    const now = new Date();
+    const generateDate = datePicker.format(now, 'DD.MM.YYYY');
+
+    const post = { ...this.state, updateDate: generateDate };
+
+    this.props.editPost(post);
   };
 
   render() {
@@ -91,10 +90,11 @@ class Component extends React.Component {
       minLength: 20,
     };
 
-    return user.authenticated && user.id === post.userId ? (
+    return user.authenticated && (user.id === post.userId || user.admin) ? (
       <div className={clsx(className, styles.root)}>
         <form autoComplete="off" onSubmit={(event) => handleSubmit(event)}>
           <h2 className={styles.title}>Edit post</h2>
+          <img src={image} alt="post img" className={styles.image} />
           <TextField
             className={styles.formField}
             required
@@ -127,13 +127,13 @@ class Component extends React.Component {
             value={telephone}
             onChange={handleChange}
           />
-          {/* <input accept="image/*" id="icon-button-file" type="file" value={image} onChange={handleChange} />
-          <label htmlFor="icon-button-file">
-            <IconButton className={styles.addPhoto} color="primary" aria-label="upload picture" component="span">
-              <PhotoCamera />
-            </IconButton>
-          </label> */}
-          <Button type="submit" variant="contained" color="primary">
+          <input accept="image/*" className={styles.input} id="raised-button-file" multiple type="file" onChange={handleChange} />
+          <label htmlFor="raised-button-file" className={styles.changePhoto}>
+            <Button variant="contained" component="span">
+              Change image
+            </Button>
+          </label>
+          <Button type="submit" variant="contained" color="primary" className={styles.submit}>
             Submit
           </Button>
         </form>

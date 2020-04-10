@@ -18,15 +18,12 @@ import styles from './PostAdd.module.scss';
 
 class Component extends React.Component {
   state = {
-    id: shortid(),
     title: '',
     price: '',
     content: '',
     email: '',
     telephone: '',
     image: undefined,
-    date: '',
-    status: 'published',
     userId: this.props.user.id,
   };
 
@@ -36,11 +33,6 @@ class Component extends React.Component {
     user: PropTypes.object,
     getCurrentDate: PropTypes.func,
   };
-
-  componentDidMount() {
-    const now = new Date();
-    this.setState({ date: datePicker.format(now, 'DD.MM.YYYY') });
-  }
 
   handleChange = ({ target }) => {
     switch (target.type) {
@@ -76,9 +68,12 @@ class Component extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log('Submit!', this.state);
+    const now = new Date();
+    const generateDate = datePicker.format(now, 'DD.MM.YYYY');
 
-    this.props.addPost(this.state);
+    const post = { ...this.state, id: shortid(), date: generateDate, status: 'published' };
+
+    this.props.addPost(post);
   };
 
   render() {
