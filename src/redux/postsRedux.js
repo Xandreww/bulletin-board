@@ -1,3 +1,6 @@
+import Axios from 'axios';
+import { api } from '../settings';
+
 /* selectors */
 export const getAll = ({ posts }) => posts.data;
 export const getSinglePost = ({ posts }, postId) => {
@@ -7,7 +10,21 @@ export const getSinglePost = ({ posts }, postId) => {
 export const getMyAds = ({ posts, user }) => {
   const filtered = posts.data.filter((post) => post.userId === user.id);
   return filtered;
-  // return filtered.length ? filtered[0] : { error: true };
+};
+
+/* thunk creators */
+export const fetchAllPosts = () => {
+  return (dispatch, getState) => {
+    dispatch(fetchStarted());
+
+    Axios.get(`${api.url}/${api.posts}`)
+      .then((res) => {
+        dispatch(fetchSuccess(res.data));
+      })
+      .catch((err) => {
+        dispatch(fetchError(err.message || true));
+      });
+  };
 };
 
 /* action name creator */

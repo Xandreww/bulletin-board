@@ -1,0 +1,32 @@
+GET http://localhost:8000/api/posts/
+
+###
+
+GET http://localhost:8000/api/postsFull/
+
+###
+
+GET http://localhost:8000/api/seats/5e5b92b91c9d4400001a5069
+
+### Send the same request two times to check is a seat is already taken
+
+POST http://localhost:8000/api/seats/
+content-type: multipart/form-data
+
+  title= "testTitle",
+  price= 123,
+  content= "Test Content Test Content Test Content",
+  email= "test@test.com",
+  telephone= "123456789",
+
+###
+
+# PUT http://localhost:8000/api/seats/5e5e335864f7bf1bc046ed9b
+# content-type: application/json
+
+# {
+#   "day": 2,
+#   "seat": 321,
+#   "client": "Test Client2",
+#   "email": "test2@test2.com"
+# }
