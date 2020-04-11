@@ -13,7 +13,7 @@ import { api } from '../../../settings';
 import clsx from 'clsx';
 
 import { connect } from 'react-redux';
-import { getAll, fetchAllPosts } from '../../../redux/postsRedux.js';
+import { getAll } from '../../../redux/postsRedux.js';
 import { getUser } from '../../../redux/userRedux';
 
 import styles from './Homepage.module.scss';
@@ -25,11 +25,6 @@ class Component extends React.Component {
     user: PropTypes.object,
     fetchAllPosts: PropTypes.func,
   };
-
-  componentDidMount() {
-    const { fetchAllPosts } = this.props;
-    fetchAllPosts();
-  }
 
   render() {
     const { className, posts, user } = this.props;
@@ -72,11 +67,7 @@ const mapStateToProps = (state) => ({
   user: getUser(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchAllPosts: () => dispatch(fetchAllPosts()),
-});
-
-const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps)(Component);
 
 export {
   // Component as Homepage,
