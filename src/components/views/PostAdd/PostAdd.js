@@ -4,8 +4,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import shortid from 'shortid';
-import datePicker from 'date-and-time';
 import { NotFound } from '../NotFound/NotFound';
 
 import clsx from 'clsx';
@@ -68,10 +66,7 @@ class Component extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    const now = new Date();
-    const generateDate = datePicker.format(now, 'DD.MM.YYYY');
-
-    const post = { ...this.state, id: shortid(), date: generateDate, status: 'published' };
+    const post = { ...this.state };
 
     this.props.addPost(post);
   };

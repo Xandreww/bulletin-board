@@ -116,6 +116,10 @@ export const reducer = (statePart = [], action = {}) => {
       return {
         ...statePart,
         data: [...statePart.data, action.payload],
+        loading: {
+          active: false,
+          error: false,
+        },
       };
     }
     case EDIT_POST: {
@@ -124,6 +128,10 @@ export const reducer = (statePart = [], action = {}) => {
         data: statePart.data.map((post) => {
           return post._id === action.payload._id ? action.payload : post;
         }),
+        loading: {
+          active: false,
+          error: false,
+        },
       };
     }
     default:

@@ -38,10 +38,21 @@ exports.add = async (req, res) => {
   // const photo = req.files.file;
 
   try {
-    const { title, price, content, email, telephone } = req.body;
+    const { title, price, content, email, telephone, image, userId } = req.body;
 
     if (title && price && content && email) {
-      const newPost = new Post({ title, price, content, email, telephone, date: generateDate, updateDate: null, status: 'published' });
+      const newPost = new Post({
+        title,
+        price,
+        content,
+        email,
+        telephone,
+        image,
+        date: generateDate,
+        updateDate: null,
+        status: 'published',
+        userId,
+      });
       await newPost.save();
       res.json(newPost);
     } else {
@@ -54,7 +65,7 @@ exports.add = async (req, res) => {
 
 exports.edit = async (req, res) => {
   try {
-    const { title, price, content, email, telephone } = req.body;
+    const { title, price, content, email, telephone, image } = req.body;
 
     const post = await Post.findById(req.params.id);
 
@@ -64,6 +75,7 @@ exports.edit = async (req, res) => {
       post.content = content;
       post.email = email;
       post.telephone = telephone;
+      post.image = image;
       post.updateDate = generateDate;
 
       await post.save();

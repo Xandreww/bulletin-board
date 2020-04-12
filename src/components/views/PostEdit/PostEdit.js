@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import datePicker from 'date-and-time';
 import { NotFound } from '../NotFound/NotFound';
 import { api } from '../../../settings';
 
@@ -70,10 +69,9 @@ class Component extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    const now = new Date();
-    const generateDate = datePicker.format(now, 'DD.MM.YYYY');
+    const post = { ...this.state };
 
-    const post = { ...this.state, updateDate: generateDate };
+    console.log(post);
 
     this.props.editPost(post.id, post);
   };

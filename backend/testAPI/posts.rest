@@ -18,18 +18,22 @@ content-type: application/json
   "price": 25,
   "content": "testContent testContent testContent",
   "email": "testEmail@test.test",
-  "telephone": "213456456"
+  "telephone": "213456456",
+  "image": "testImage",
+  "userId": "1"
 }
 
 ###
 
-PUT http://localhost:8000/api/posts/5e9062950e71d4322470e7ec
+PUT http://localhost:8000/api/posts/5e92fbe6ce8cb92b8410d79f
 content-type: application/json
 
 {
-  "title": "test Title2",
-  "price": 252,
-  "content": "testContent2 testContent2 testContent2",
-  "email": "testEmail2@test2.test2",
-  "telephone": "222222222"
+  "title": "putPutPutPut",
+  "price": 30,
+  "content": "putPutPutPutputPutPutPutputPutPutPutputPutPutPutputPutPutPut",
+  "email": "putPutPutPut@test.test",
+  "telephone": "213456456",
+  "image": "putImage",
+  "userId": "1"
 }
