@@ -2,13 +2,26 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
+const passport = require('passport');
+const session = require('express-session');
+// eslint-disable-next-line no-unused-vars
+const passportConfig = require('./config/passport');
 
 const postsRoutes = require('./routes/posts.routes');
 const usersRoutes = require('./routes/users.routes');
 
 const app = express();
+console.log('hello:', process.env.clientID);
 
 /* MIDDLEWARE */
+// init session mechanism
+app.use(session({ secret: 'mySecretKey' }));
+
+// init passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// standard middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

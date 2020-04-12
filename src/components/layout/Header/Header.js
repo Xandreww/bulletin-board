@@ -28,7 +28,7 @@ const Component = ({ className, user, login, logoff }) => {
           </Button>
         </div>
       ) : (
-        <Button component={Link} variant="contained" color="primary" to="https://google.com" onClick={authenticationHandler}>
+        <Button variant="contained" color="primary" href="/auth/google">
           Login with Google
         </Button>
       )}

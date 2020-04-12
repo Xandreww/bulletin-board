@@ -1,7 +1,5 @@
 const datePicker = require('date-and-time');
 const Post = require('../models/post.model');
-const path = require('path');
-const multer = require('multer');
 
 const now = new Date();
 const generateDate = datePicker.format(now, 'DD.MM.YYYY');
