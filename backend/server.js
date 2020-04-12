@@ -9,9 +9,9 @@ const passportConfig = require('./config/passport');
 
 const postsRoutes = require('./routes/posts.routes');
 const usersRoutes = require('./routes/users.routes');
+const authRoutes = require('./routes/auth.routes');
 
 const app = express();
-console.log('hello:', process.env.clientID);
 
 /* MIDDLEWARE */
 // init session mechanism
@@ -29,6 +29,7 @@ app.use(express.urlencoded({ extended: false }));
 /* API ENDPOINTS */
 app.use('/api', postsRoutes);
 app.use('/api', usersRoutes);
+app.use('/auth', authRoutes);
 
 /* API ERROR PAGES */
 app.use('/api', (req, res) => {

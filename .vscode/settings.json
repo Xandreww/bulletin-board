@@ -5,5 +5,8 @@
   "explorer.compactFolders": false,
   "cSpell.words": [
     "gameboy"
+  ],
+  "cSpell.ignoreWords": [
+    "openid"
   ]
 }
