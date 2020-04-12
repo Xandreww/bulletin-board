@@ -12,6 +12,7 @@ const postSchema = new mongoose.Schema({
   status: { type: String, required: true },
   // userId: [{ type: mongoose.SchemaTypes.ObjectId, required: true, ref: 'User' }],
   userId: { type: String, required: true },
+  newImage: { type: Buffer },
 });
 
 module.exports = mongoose.model('Post', postSchema);

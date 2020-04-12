@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { NotFound } from '../NotFound/NotFound';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import { api } from '../../../settings';
 
 import clsx from 'clsx';
@@ -129,6 +130,7 @@ class Component extends React.Component {
           <input accept="image/*" className={styles.input} id="raised-button-file" multiple type="file" onChange={handleChange} />
           <label htmlFor="raised-button-file" className={styles.changePhoto}>
             <Button variant="contained" component="span">
+              <PhotoCamera />
               Change image
             </Button>
           </label>

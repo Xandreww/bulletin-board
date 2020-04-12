@@ -1,5 +1,7 @@
 const datePicker = require('date-and-time');
 const Post = require('../models/post.model');
+const path = require('path');
+const multer = require('multer');
 
 const now = new Date();
 const generateDate = datePicker.format(now, 'DD.MM.YYYY');
@@ -35,7 +37,7 @@ exports.getId = async (req, res) => {
 };
 
 exports.add = async (req, res) => {
-  // const photo = req.files.file;
+  const newImage = req.files.file;
 
   try {
     const { title, price, content, email, telephone, image, userId } = req.body;
@@ -52,7 +54,10 @@ exports.add = async (req, res) => {
         updateDate: null,
         status: 'published',
         userId,
+        newImage,
       });
+      console.log(newImage);
+
       await newPost.save();
       res.json(newPost);
     } else {

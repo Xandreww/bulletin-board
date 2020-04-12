@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import { NotFound } from '../NotFound/NotFound';
 
@@ -22,6 +21,7 @@ class Component extends React.Component {
     email: '',
     telephone: '',
     image: undefined,
+    newImage: undefined,
     userId: this.props.user.id,
   };
 
@@ -55,7 +55,8 @@ class Component extends React.Component {
         break;
       }
       case 'file': {
-        this.setState({ image: target.value });
+        // this.setState({ image: target.value });
+        this.setState({ newImage: target.files[0] });
         break;
       }
       default:
@@ -68,13 +69,16 @@ class Component extends React.Component {
 
     const post = { ...this.state };
 
+    console.log(post);
+    console.log('myImage:', this.state.newImage);
+
     this.props.addPost(post);
   };
 
   render() {
     const { handleChange, handleSubmit } = this;
     const { className, user } = this.props;
-    const { title, price, content, email, telephone, image } = this.state;
+    const { title, price, content, email, telephone } = this.state;
 
     const titleProps = {
       minLength: 10,
@@ -120,11 +124,13 @@ class Component extends React.Component {
             value={telephone}
             onChange={handleChange}
           />
-          <input accept="image/*" id="icon-button-file" type="file" value={image} onChange={handleChange} />
-          <label htmlFor="icon-button-file">
-            <IconButton className={styles.addPhoto} color="primary" aria-label="upload picture" component="span">
+
+          <input accept="image/*" className={styles.input} id="raised-button-file" multiple type="file" onChange={handleChange} />
+          <label htmlFor="raised-button-file" className={styles.changePhoto}>
+            <Button variant="contained" component="span">
               <PhotoCamera />
-            </IconButton>
+              Add image
+            </Button>
           </label>
           <Button type="submit" variant="contained" color="primary">
             Submit
