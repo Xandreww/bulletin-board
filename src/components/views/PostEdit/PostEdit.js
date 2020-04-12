@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import datePicker from 'date-and-time';
 import { NotFound } from '../NotFound/NotFound';
+import { api } from '../../../settings';
 
 import clsx from 'clsx';
 
@@ -80,7 +81,7 @@ class Component extends React.Component {
   render() {
     const { handleChange, handleSubmit } = this;
     const { className, user, post } = this.props;
-    const { title, price, content, email, telephone, image } = this.state;
+    const { title, price, content, email, telephone } = this.state;
 
     const titleProps = {
       minLength: 10,
@@ -94,7 +95,7 @@ class Component extends React.Component {
       <div className={clsx(className, styles.root)}>
         <form autoComplete="off" onSubmit={(event) => handleSubmit(event)}>
           <h2 className={styles.title}>Edit post</h2>
-          <img src={image} alt="post img" className={styles.image} />
+          <img src={`${api.imageUrl}${post.image}`} alt="post img" className={styles.image} />
           <TextField
             className={styles.formField}
             required

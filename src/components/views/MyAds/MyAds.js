@@ -9,6 +9,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import AddIcon from '@material-ui/icons/Add';
 import { Link } from 'react-router-dom';
 import { NotFound } from '../NotFound/NotFound';
+import { api } from '../../../settings';
 
 import clsx from 'clsx';
 
@@ -30,7 +31,7 @@ const Component = ({ className, posts, user }) => (
           {posts.map((post) => (
             <Card className={styles.card} key={post.id} variant="outlined">
               <CardActionArea component={Link} to={`/post/${post.id}`}>
-                <CardMedia className={styles.cardMedia} component="img" alt="Ad item" image={post.image} />
+                <CardMedia className={styles.cardMedia} component="img" alt="Ad item" image={`${api.imageUrl}${post.image}`} />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
                     {post.title}

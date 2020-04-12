@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/Edit';
 import { Link } from 'react-router-dom';
 import { NotFound } from '../NotFound/NotFound';
+import { api } from '../../../settings';
 
 import clsx from 'clsx';
 
@@ -40,7 +41,7 @@ class Component extends React.Component {
               </div>
               <h2 className={styles.title}>{post.title}</h2>
             </CardContent>
-            <CardMedia component="img" alt="Ad item" image={post.image} />
+            <CardMedia component="img" alt="Ad item" image={`${api.imageUrl}${post.image}`} />
             <CardContent>
               <p>{post.text}</p>
               <p>{`Price: $${post.price}`}</p>
