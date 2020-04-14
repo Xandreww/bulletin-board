@@ -15,14 +15,16 @@ import styles from './PostAdd.module.scss';
 
 class Component extends React.Component {
   state = {
-    title: '',
-    price: '',
-    content: '',
-    email: '',
-    telephone: '',
-    image: undefined,
-    newImage: undefined,
-    userId: this.props.user.id,
+    post: {
+      title: '',
+      price: '',
+      content: '',
+      email: '',
+      telephone: '',
+      image: null,
+      userId: this.props.user.id,
+    },
+    imagePreview: null,
   };
 
   static propTypes = {
@@ -32,31 +34,62 @@ class Component extends React.Component {
     getCurrentDate: PropTypes.func,
   };
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const { post } = this.state;
+    console.log('post:', post);
+    console.log('image:', post.image);
+
+    const formData = new FormData();
+
+    for (let key of ['title', 'price', 'content', 'email', 'telephone']) {
+      formData.append(key, post[key]);
+    }
+
+    formData.append('image', post.image);
+    formData.append('userId', post.userId);
+
+    // Display the key/value pairs for formData
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ', ' + pair[1]);
+    }
+
+    this.props.addPost(formData);
+  };
+
   handleChange = ({ target }) => {
+    const { post } = this.state;
+    const { value } = target;
+
     switch (target.type) {
       case 'text': {
-        this.setState({ title: target.value });
+        // this.setState({ title: target.value });
+        this.setState({ post: { ...post, title: value } });
         break;
       }
       case 'number': {
-        this.setState({ price: target.value });
+        // this.setState({ price: target.value });
+        this.setState({ post: { ...post, price: value } });
         break;
       }
       case 'textarea': {
-        this.setState({ content: target.value });
+        // this.setState({ content: target.value });
+        this.setState({ post: { ...post, content: value } });
         break;
       }
       case 'email': {
-        this.setState({ email: target.value });
+        // this.setState({ email: target.value });
+        this.setState({ post: { ...post, email: value } });
         break;
       }
       case 'tel': {
-        this.setState({ telephone: target.value });
+        // this.setState({ telephone: target.value });
+        this.setState({ post: { ...post, telephone: value } });
         break;
       }
       case 'file': {
-        // this.setState({ image: target.value });
-        this.setState({ newImage: target.files[0] });
+        // console.log('image: ', target.files[0]);
+        this.setState({ post: { ...post, image: target.files[0] }, imagePreview: URL.createObjectURL(target.files[0]) });
         break;
       }
       default:
@@ -64,21 +97,10 @@ class Component extends React.Component {
     }
   };
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-
-    const post = { ...this.state };
-
-    console.log(post);
-    console.log('myImage:', this.state.newImage);
-
-    this.props.addPost(post);
-  };
-
   render() {
     const { handleChange, handleSubmit } = this;
     const { className, user } = this.props;
-    const { title, price, content, email, telephone } = this.state;
+    const { title, price, content, email, telephone, imagePreview } = this.state;
 
     const titleProps = {
       minLength: 10,
@@ -92,6 +114,7 @@ class Component extends React.Component {
       <div className={clsx(className, styles.root)}>
         <form autoComplete="off" onSubmit={(event) => handleSubmit(event)}>
           <h2 className={styles.title}>Add new post</h2>
+          {imagePreview && <img src={imagePreview} alt="post img" className={styles.image} />}
           <TextField
             className={styles.formField}
             required
@@ -126,7 +149,7 @@ class Component extends React.Component {
           />
 
           <input accept="image/*" className={styles.input} id="raised-button-file" multiple type="file" onChange={handleChange} />
-          <label htmlFor="raised-button-file" className={styles.changePhoto}>
+          <label htmlFor="raised-button-file" className={styles.addPhoto}>
             <Button variant="contained" component="span">
               <PhotoCamera />
               Add image

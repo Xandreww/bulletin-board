@@ -35,26 +35,24 @@ exports.getId = async (req, res) => {
 };
 
 exports.add = async (req, res) => {
-  const newImage = req.files.file;
-
   try {
-    const { title, price, content, email, telephone, image, userId } = req.body;
+    const { title, price, content, email, telephone, userId } = req.files;
+    const image = req.files.file;
+
+    let fileName;
+    if (!req.files.image) fileName = null;
+    else fileName = req.files.image.path.split('/').slice(-1)[0];
 
     if (title && price && content && email) {
       const newPost = new Post({
-        title,
-        price,
-        content,
-        email,
-        telephone,
-        image,
+        ...req.fields,
+        image: fileName,
         date: generateDate,
         updateDate: null,
         status: 'published',
         userId,
-        newImage,
       });
-      console.log(newImage);
+      console.log(image);
 
       await newPost.save();
       res.json(newPost);
@@ -68,7 +66,11 @@ exports.add = async (req, res) => {
 
 exports.edit = async (req, res) => {
   try {
-    const { title, price, content, email, telephone, image } = req.body;
+    const { title, price, content, email, telephone } = req.body;
+
+    let fileName;
+    if (!req.files.image) fileName = null;
+    else fileName = req.files.image.path.split('/').slice(-1)[0];
 
     const post = await Post.findById(req.params.id);
 
@@ -78,8 +80,12 @@ exports.edit = async (req, res) => {
       post.content = content;
       post.email = email;
       post.telephone = telephone;
-      post.image = image;
       post.updateDate = generateDate;
+      if (fileName) {
+        post.image = fileName;
+      } else {
+        return post.image;
+      }
 
       await post.save();
       res.json(post);

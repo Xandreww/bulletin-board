@@ -35,7 +35,7 @@ export const addPostRequest = (data) => {
   return (dispatch, getState) => {
     dispatch(fetchStarted());
 
-    Axios.post(`${api.url}/${api.posts}`, data)
+    Axios.post(`${api.url}/${api.posts}`, data, { headers: { 'Content-Type': 'application/json' } })
       .then((res) => {
         dispatch(addPost(res.data));
       })
@@ -49,7 +49,7 @@ export const updatePostRequest = (id, data) => {
   return (dispatch, getState) => {
     dispatch(fetchStarted());
 
-    Axios.put(`${api.url}/${api.posts}/${id}`, data)
+    Axios.put(`${api.url}/${api.posts}/${id}`, data, { headers: { 'Content-Type': 'application/json' } })
       .then((res) => {
         dispatch(editPost(res.data));
       })
