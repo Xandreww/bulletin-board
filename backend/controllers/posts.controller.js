@@ -36,7 +36,7 @@ exports.getId = async (req, res) => {
 
 exports.add = async (req, res) => {
   try {
-    const { title, price, content, email, telephone, userId } = req.files;
+    const { title, price, content, email, telephone, userId } = req.fields;
     const image = req.files.file;
 
     let fileName;
