@@ -15,7 +15,7 @@ const app = express();
 
 /* MIDDLEWARE */
 // init session mechanism
-app.use(session({ secret: 'mySecretKey' }));
+app.use(session({ secret: 'mySecretKey', saveUninitialized: true, resave: true }));
 
 // init passport
 app.use(passport.initialize());
