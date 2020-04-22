@@ -4,17 +4,7 @@ const Post = require('../models/post.model');
 const now = new Date();
 const generateDate = datePicker.format(now, 'DD.MM.YYYY');
 
-exports.getPartPosts = async (req, res) => {
-  try {
-    const result = await Post.find({ status: 'published' }).select('date title image price').sort({ date: -1 });
-    if (!result) res.status(404).json({ post: 'Not found' });
-    else res.json(result);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-};
-
-exports.getFullPosts = async (req, res) => {
+exports.getPosts = async (req, res) => {
   try {
     const result = await Post.find().sort({ date: -1 });
     if (!result) res.status(404).json({ post: 'Not found' });
@@ -36,33 +26,52 @@ exports.getId = async (req, res) => {
 
 exports.add = async (req, res) => {
   try {
-    const { title, price, content, email, telephone, userId } = req.fields;
     const image = req.files.file;
+    console.log(req.fields, image);
 
     let fileName;
-    if (!req.files.image) fileName = null;
-    else fileName = req.files.image.path.split('/').slice(-1)[0];
+    if (!image) fileName = null;
+    else fileName = image.path.split('/').slice(-1)[0];
 
-    if (title && price && content && email) {
-      const newPost = new Post({
-        ...req.fields,
-        image: fileName,
-        date: generateDate,
-        updateDate: null,
-        status: 'published',
-        userId,
-      });
-      console.log(image);
+    console.log('filename:', fileName);
 
-      await newPost.save();
-      res.json(newPost);
-    } else {
-      throw new Error('Wrong input!');
-    }
+    const newPost = new Post({ ...req.fields, image: fileName });
+    await newPost.save();
+    res.json(newPost);
   } catch (err) {
     res.status(500).json(err);
   }
 };
+
+// exports.add = async (req, res) => {
+//   try {
+//     const { title, price, content, email, telephone, userId } = req.fields;
+//     const image = req.files.file;
+
+//     let fileName;
+//     if (!req.files.image) fileName = null;
+//     else fileName = req.files.image.path.split('/').slice(-1)[0];
+
+//     if (title && price && content && email) {
+//       const newPost = new Post({
+//         ...req.fields,
+//         image: fileName,
+//         date: generateDate,
+//         updateDate: null,
+//         status: 'published',
+//         userId,
+//       });
+//       console.log(image);
+
+//       await newPost.save();
+//       res.json(newPost);
+//     } else {
+//       throw new Error('Wrong input!');
+//     }
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// };
 
 exports.edit = async (req, res) => {
   try {

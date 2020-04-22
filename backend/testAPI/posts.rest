@@ -2,38 +2,6 @@ GET http://localhost:8000/api/posts/
 
 ###
 
-GET http://localhost:8000/api/postsFull/
+GET http://localhost:8000/api/posts/5e8cbfac29976b28ac595b87
 
 ###
-
-GET http://localhost:8000/api/posts/5e905d7ba87c9a31d048da07
-
-###
-
-POST http://localhost:8000/api/posts/
-content-type: application/json
-
-{
-  "title": "test Title",
-  "price": 25,
-  "content": "testContent testContent testContent",
-  "email": "testEmail@test.test",
-  "telephone": "213456456",
-  "image": "testImage",
-  "userId": "1"
-}
-
-###
-
-PUT http://localhost:8000/api/posts/5e92fbe6ce8cb92b8410d79f
-content-type: application/json
-
-{
-  "title": "putPutPutPut",
-  "price": 30,
-  "content": "putPutPutPutputPutPutPutputPutPutPutputPutPutPutputPutPutPut",
-  "email": "putPutPutPut@test.test",
-  "telephone": "213456456",
-  "image": "putImage",
-  "userId": "1"
-}

@@ -20,7 +20,7 @@ export const fetchAllPosts = () => {
     if (posts.data.length === 0 && posts.loading.active === false) {
       dispatch(fetchStarted());
 
-      Axios.get(`${api.url}/${api.fullPosts}`)
+      Axios.get(`${api.url}/${api.posts}`)
         .then((res) => {
           dispatch(fetchSuccess(res.data));
         })
