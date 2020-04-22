@@ -1,8 +1,6 @@
-const datePicker = require('date-and-time');
 const Post = require('../models/post.model');
 
 const now = new Date();
-const generateDate = datePicker.format(now, 'DD.MM.YYYY');
 
 exports.getPosts = async (req, res) => {
   try {
@@ -26,52 +24,20 @@ exports.getId = async (req, res) => {
 
 exports.add = async (req, res) => {
   try {
-    const image = req.files.file;
-    console.log(req.fields, image);
+    const image = req.files.image;
 
     let fileName;
     if (!image) fileName = null;
     else fileName = image.path.split('/').slice(-1)[0];
 
-    console.log('filename:', fileName);
-
-    const newPost = new Post({ ...req.fields, image: fileName });
+    const newPost = new Post({ ...req.fields, date: now, updateDate: null, status: 'published', image: fileName });
     await newPost.save();
     res.json(newPost);
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 };
-
-// exports.add = async (req, res) => {
-//   try {
-//     const { title, price, content, email, telephone, userId } = req.fields;
-//     const image = req.files.file;
-
-//     let fileName;
-//     if (!req.files.image) fileName = null;
-//     else fileName = req.files.image.path.split('/').slice(-1)[0];
-
-//     if (title && price && content && email) {
-//       const newPost = new Post({
-//         ...req.fields,
-//         image: fileName,
-//         date: generateDate,
-//         updateDate: null,
-//         status: 'published',
-//         userId,
-//       });
-//       console.log(image);
-
-//       await newPost.save();
-//       res.json(newPost);
-//     } else {
-//       throw new Error('Wrong input!');
-//     }
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// };
 
 exports.edit = async (req, res) => {
   try {
@@ -89,7 +55,7 @@ exports.edit = async (req, res) => {
       post.content = content;
       post.email = email;
       post.telephone = telephone;
-      post.updateDate = generateDate;
+      post.updateDate = now;
       if (fileName) {
         post.image = fileName;
       } else {
