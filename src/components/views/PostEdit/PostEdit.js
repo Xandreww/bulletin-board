@@ -16,16 +16,16 @@ import styles from './PostEdit.module.scss';
 
 class Component extends React.Component {
   state = {
-    id: this.props.post._id,
-    title: this.props.post.title,
-    price: this.props.post.price,
-    content: this.props.post.content,
-    email: this.props.post.email,
-    telephone: this.props.post.telephone,
-    image: this.props.post.image,
-    date: this.props.post.date,
-    status: this.props.post.status,
-    userId: this.props.user.id,
+    id: '',
+    title: '',
+    price: '',
+    content: '',
+    email: '',
+    telephone: '',
+    image: '',
+    date: '',
+    status: '',
+    userId: '',
   };
 
   static propTypes = {
@@ -35,6 +35,27 @@ class Component extends React.Component {
     editPost: PropTypes.func,
     updateDate: PropTypes.instanceOf(Date),
   };
+
+  static getDerivedStateFromProps(props, state) {
+    const { id, title, price, content, email, telephone, image, date, status, userId } = state;
+
+    if (!id || !title || !price || !content || !email || !telephone || !image || !date || !status || !userId) {
+      return {
+        id: props.post._id,
+        title: props.post.title,
+        price: props.post.price,
+        content: props.post.content,
+        email: props.post.title,
+        telephone: props.post.telephone,
+        image: props.post.image,
+        date: props.post.date,
+        status: props.post.status,
+        userId: props.user.id,
+      };
+    } else {
+      return null;
+    }
+  }
 
   handleChange = ({ target }) => {
     switch (target.type) {
@@ -92,6 +113,7 @@ class Component extends React.Component {
 
     return user.authenticated && (user.id === post.userId || user.admin) ? (
       <div className={clsx(className, styles.root)}>
+        {console.log('state in component:', this.state)};
         <form autoComplete="off" onSubmit={(event) => handleSubmit(event)}>
           <h2 className={styles.title}>Edit post</h2>
           <img src={`${api.imageUrl}${post.image}`} alt="post img" className={styles.image} />
