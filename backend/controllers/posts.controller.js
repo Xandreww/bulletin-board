@@ -42,10 +42,11 @@ exports.add = async (req, res) => {
 exports.edit = async (req, res) => {
   try {
     const { title, price, content, email, telephone } = req.body;
+    const image = req.files.image;
 
     let fileName;
-    if (!req.files.image) fileName = null;
-    else fileName = req.files.image.path.split('/').slice(-1)[0];
+    if (!image) fileName = null;
+    else fileName = image.path.split('/').slice(-1)[0];
 
     const post = await Post.findById(req.params.id);
 
@@ -66,6 +67,7 @@ exports.edit = async (req, res) => {
       res.json(post);
     } else res.status(404).json({ message: 'Not found...' });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 };

@@ -37,8 +37,6 @@ class Component extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { post } = this.state;
-    console.log('post:', post);
-    console.log('image:', post.image);
 
     const formData = new FormData();
 
@@ -50,7 +48,7 @@ class Component extends React.Component {
     formData.append('userId', post.userId);
 
     // Display the key/value pairs for formData
-    for (var pair of formData.entries()) {
+    for (let pair of formData.entries()) {
       console.log(pair[0] + ', ' + pair[1]);
     }
 
