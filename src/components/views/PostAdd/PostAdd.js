@@ -61,32 +61,26 @@ class Component extends React.Component {
 
     switch (target.type) {
       case 'text': {
-        // this.setState({ title: target.value });
         this.setState({ post: { ...post, title: value } });
         break;
       }
       case 'number': {
-        // this.setState({ price: target.value });
         this.setState({ post: { ...post, price: value } });
         break;
       }
       case 'textarea': {
-        // this.setState({ content: target.value });
         this.setState({ post: { ...post, content: value } });
         break;
       }
       case 'email': {
-        // this.setState({ email: target.value });
         this.setState({ post: { ...post, email: value } });
         break;
       }
       case 'tel': {
-        // this.setState({ telephone: target.value });
         this.setState({ post: { ...post, telephone: value } });
         break;
       }
       case 'file': {
-        // console.log('image: ', target.files[0]);
         this.setState({ post: { ...post, image: target.files[0] }, imagePreview: URL.createObjectURL(target.files[0]) });
         break;
       }

@@ -41,8 +41,10 @@ exports.add = async (req, res) => {
 
 exports.edit = async (req, res) => {
   try {
-    const { title, price, content, email, telephone } = req.body;
+    const { title, price, content, email, telephone } = req.fields;
     const image = req.files.image;
+
+    console.log('fields:', req.fields);
 
     let fileName;
     if (!image) fileName = null;

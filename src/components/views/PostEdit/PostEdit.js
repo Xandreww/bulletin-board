@@ -45,7 +45,7 @@ class Component extends React.Component {
         title: props.post.title,
         price: props.post.price,
         content: props.post.content,
-        email: props.post.title,
+        email: props.post.email,
         telephone: props.post.telephone,
         image: props.post.image,
         date: props.post.date,
@@ -56,6 +56,26 @@ class Component extends React.Component {
       return null;
     }
   }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const post = { ...this.state };
+
+    const formData = new FormData();
+
+    for (let key of ['title', 'price', 'content', 'email', 'telephone']) {
+      formData.append(key, post[key]);
+    }
+
+    formData.append('image', post.image);
+
+    // Display the key/value pairs for formData
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ', ' + pair[1]);
+    }
+
+    this.props.editPost(formData);
+  };
 
   handleChange = ({ target }) => {
     switch (target.type) {
@@ -88,16 +108,6 @@ class Component extends React.Component {
     }
   };
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-
-    const post = { ...this.state };
-
-    console.log(post);
-
-    this.props.editPost(post.id, post);
-  };
-
   render() {
     const { handleChange, handleSubmit } = this;
     const { className, user, post } = this.props;
@@ -113,7 +123,6 @@ class Component extends React.Component {
 
     return user.authenticated && (user.id === post.userId || user.admin) ? (
       <div className={clsx(className, styles.root)}>
-        {console.log('state in component:', this.state)};
         <form autoComplete="off" onSubmit={(event) => handleSubmit(event)}>
           <h2 className={styles.title}>Edit post</h2>
           <img src={`${api.imageUrl}${post.image}`} alt="post img" className={styles.image} />
