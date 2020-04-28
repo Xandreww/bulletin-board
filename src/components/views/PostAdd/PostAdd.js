@@ -104,7 +104,7 @@ class Component extends React.Component {
 
     return user.authenticated ? (
       <div className={clsx(className, styles.root)}>
-        {imagePreview && <img src={imagePreview} alt="post img" className={styles.image} />}
+        {imagePreview && <img src={imagePreview} alt="post img" className={styles.preview} />}
         <form autoComplete="off" onSubmit={(event) => handleSubmit(event)}>
           <h2 className={styles.title}>Add new post</h2>
           <TextField

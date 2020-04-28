@@ -26,6 +26,7 @@ class Component extends React.Component {
     date: '',
     status: '',
     userId: '',
+    imagePreview: null,
   };
 
   static propTypes = {
@@ -70,11 +71,11 @@ class Component extends React.Component {
     formData.append('image', post.image);
 
     // Display the key/value pairs for formData
-    for (let pair of formData.entries()) {
-      console.log(pair[0] + ', ' + pair[1]);
-    }
+    // for (let pair of formData.entries()) {
+    //   console.log(pair[0] + ', ' + pair[1]);
+    // }
 
-    this.props.editPost(formData);
+    this.props.editPost(post.id, formData);
   };
 
   handleChange = ({ target }) => {
@@ -100,7 +101,7 @@ class Component extends React.Component {
         break;
       }
       case 'file': {
-        this.setState({ file: target.value });
+        this.setState({ image: target.files[0], imagePreview: URL.createObjectURL(target.files[0]) });
         break;
       }
       default:
@@ -111,7 +112,7 @@ class Component extends React.Component {
   render() {
     const { handleChange, handleSubmit } = this;
     const { className, user, post } = this.props;
-    const { title, price, content, email, telephone } = this.state;
+    const { title, price, content, email, telephone, imagePreview } = this.state;
 
     const titleProps = {
       minLength: 10,
@@ -123,9 +124,9 @@ class Component extends React.Component {
 
     return user.authenticated && (user.id === post.userId || user.admin) ? (
       <div className={clsx(className, styles.root)}>
+        {imagePreview && <img src={imagePreview} alt="post img" className={styles.preview} />}
         <form autoComplete="off" onSubmit={(event) => handleSubmit(event)}>
-          <h2 className={styles.title}>Edit post</h2>
-          <img src={`${api.imageUrl}${post.image}`} alt="post img" className={styles.image} />
+          {!imagePreview && <img src={`${api.imageUrl}${post.image}`} alt="post img" className={styles.image} />}
           <TextField
             className={styles.formField}
             required

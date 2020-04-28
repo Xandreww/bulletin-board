@@ -44,8 +44,6 @@ exports.edit = async (req, res) => {
     const { title, price, content, email, telephone } = req.fields;
     const image = req.files.image;
 
-    console.log('fields:', req.fields);
-
     let fileName;
     if (!image) fileName = null;
     else fileName = image.path.split('/').slice(-1)[0];
@@ -61,8 +59,6 @@ exports.edit = async (req, res) => {
       post.updateDate = now;
       if (fileName) {
         post.image = fileName;
-      } else {
-        return post.image;
       }
 
       await post.save();
