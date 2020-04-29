@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+import { api } from '../../../settings';
 
 import clsx from 'clsx';
 
@@ -28,7 +29,7 @@ const Component = ({ className, user, login, logoff }) => {
           </Button>
         </div>
       ) : (
-        <Button variant="contained" color="primary" href="/auth/google">
+        <Button variant="contained" color="primary" href={`${api.imageUrl}auth/google`}>
           Login with Google
         </Button>
       )}
