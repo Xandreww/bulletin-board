@@ -9,4 +9,23 @@
   .logout {
     margin-left: 10px;
   }
+
+  .button {
+    background-color: #dd4b39;
+    color: white;
+
+    &:active {
+      box-shadow: inset 0 0 0 32px rgba(0, 0, 0, 0.1);
+    }
+
+    &hover,
+    &focus {
+      background: #e74b37;
+      box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .icon {
+    margin-right: 10px;
+  }
 }
