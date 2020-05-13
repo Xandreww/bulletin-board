@@ -1,1 +1,1 @@
-web: yarn start yarn server
+web: yarn start
