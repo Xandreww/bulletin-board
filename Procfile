@@ -1,1 +1,2 @@
-web: heroku run yarn start server
+web: yarn start
+worker: yarn server
