@@ -45,7 +45,7 @@ app.use('*', (req, res) => {
 
 /* MONGOOSE */
 const atlas = 'mongodb+srv://user-1:8PWfbjWF3QqIr8wc@cluster0-omz6c.mongodb.net/bulletinBoard?retryWrites=true&w=majority';
-mongoose.connect(atlas, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URI || atlas, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.once('open', () => {
   console.log('Successfully connected to the database');
