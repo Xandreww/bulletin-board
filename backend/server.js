@@ -4,13 +4,25 @@ const path = require('path');
 const mongoose = require('mongoose');
 const formidable = require('express-formidable');
 const uniqid = require('uniqid');
+const passport = require('passport');
+const session = require('express-session');
+// eslint-disable-next-line no-unused-vars
+const passportConfig = require('./config/passport');
 
 const postsRoutes = require('./routes/posts.routes');
 const usersRoutes = require('./routes/users.routes');
+const authRoutes = require('./routes/auth.routes');
 
 const app = express();
 
 /* MIDDLEWARE */
+// init session mechanism
+app.use(session({ secret: 'mySecretKey', saveUninitialized: true, resave: true }));
+
+// init passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 // standard middleware
 app.use(cors());
 app.use(
@@ -30,6 +42,7 @@ app.use(express.urlencoded({ extended: false }));
 /* API ENDPOINTS */
 app.use('/api', postsRoutes);
 app.use('/api', usersRoutes);
+app.use('/auth', authRoutes);
 
 /* API ERROR PAGES */
 app.use('/api', (req, res) => {
