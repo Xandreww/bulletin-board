@@ -44,7 +44,8 @@ app.use('*', (req, res) => {
 });
 
 /* MONGOOSE */
-mongoose.connect('mongodb://localhost:27017/bulletinBoard', { useNewUrlParser: true, useUnifiedTopology: true });
+const atlas = 'mongodb+srv://user-1:8PWfbjWF3QqIr8wc@cluster0-omz6c.mongodb.net/bulletinBoard?retryWrites=true&w=majority';
+mongoose.connect(atlas, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.once('open', () => {
   console.log('Successfully connected to the database');
