@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
 import { Link } from 'react-router-dom';
-import { api } from '../../../settings';
 
 import clsx from 'clsx';
 
@@ -30,8 +28,7 @@ const Component = ({ className, user, login, logoff }) => {
           </Button>
         </div>
       ) : (
-        <Button variant="contained" className={styles.button} href={`${api.imageUrl}auth/google`}>
-          <AddIcon className={styles.icon} />
+        <Button component={Link} variant="contained" color="primary" to="https://google.com" onClick={authenticationHandler}>
           Login with Google
         </Button>
       )}

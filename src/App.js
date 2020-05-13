@@ -15,8 +15,6 @@ import { Post } from './components/views/Post/Post';
 import { PostEdit } from './components/views/PostEdit/PostEdit';
 import { PostAdd } from './components/views/PostAdd/PostAdd';
 import { NotFound } from './components/views/NotFound/NotFound';
-import { Logged } from './components/views/User/Logged';
-import { NoPermission } from './components/views/User/NoPermission';
 
 const theme = createMuiTheme({
   palette: {
@@ -48,8 +46,6 @@ class Component extends React.Component {
                 <Route exact path="/post/add" component={PostAdd} />
                 <Route exact path="/post/:id" component={Post} />
                 <Route exact path="/post/:id/edit" component={PostEdit} />
-                <Route exact path="/user/logged" component={Logged} />
-                <Route exact path="/user/no-permission" component={NoPermission} />
                 <Route path="*" component={NotFound} />
               </Switch>
             </MainLayout>
