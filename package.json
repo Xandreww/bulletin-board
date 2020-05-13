@@ -12,7 +12,8 @@
     "test-all": "react-scripts test --watchAll=false --noStackTrace",
     "test-related": "react-scripts test --watchAll=false --noStackTrace --findRelatedTests",
     "eject": "react-scripts eject",
-    "server": "npx nodemon backend/server.js"
+    "server": "npx nodemon backend/server.js",
+    "start-all": "yarn start server"
   },
   "prettier": {
     "tabWidth": 2,
