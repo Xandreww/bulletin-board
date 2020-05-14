@@ -1,1 +1,1 @@
-web: yarn run start-all
+web: node backend/server.js
