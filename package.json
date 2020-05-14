@@ -13,7 +13,6 @@
     "test-related": "react-scripts test --watchAll=false --noStackTrace --findRelatedTests",
     "eject": "react-scripts eject",
     "server": "npx nodemon backend/server.js",
-    "postinstall": "npm run build",
     "start-all": "yarn start server"
   },
   "prettier": {
