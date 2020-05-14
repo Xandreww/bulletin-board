@@ -1,5 +1,9 @@
 # Bulletin-board
 
+## Preview
+
+https://bulletin-board-1.herokuapp.com/
+
 ## Project description
 
 This project trying to model the functionality of the bulletin board. You can view, add and edit posts.
