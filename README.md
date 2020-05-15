@@ -6,7 +6,7 @@ https://bulletin-board-1.herokuapp.com/
 
 ## Project description
 
-This project trying to model the functionality of the bulletin board. You can view, add and edit posts.
+This project is trying to model the functionality of the bulletin board. You can view, add and edit posts.
 
 The content was prepared mostly independently during last weeks of Kodilla Wab Developer Plus bootcamp.
 The site has been prepared in the **React** environment using **Redux** and other libraries.
